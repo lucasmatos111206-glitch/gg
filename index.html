@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<title>Roadmap · Léon</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0a0b0e;
+  --bg2:#111318;
+  --bg3:#181b22;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --text:#e6e8ed;
+  --muted:#656878;
+  --dim:#35384a;
+  --lime:#c9f14a;
+  --teal:#3cf0a8;
+  --orange:#f0a83c;
+  --purple:#9d6cff;
+  --red:#f04a4a;
+  --card:#121419;
+  --r:12px;
+  --rS:8px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  min-height:100dvh;
+  max-width:480px;
+  margin:0 auto;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─── GRAIN ─── */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:999;opacity:.5;
+}
+
+/* ─── HERO ─── */
+.hero{
+  padding:52px 20px 28px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-60px;right:-80px;
+  width:280px;height:280px;
+  background:radial-gradient(circle,rgba(201,241,74,.09),transparent 65%);
+  pointer-events:none;
+}
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(201,241,74,.09);
+  border:1px solid rgba(201,241,74,.22);
+  color:var(--lime);
+  font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 11px;border-radius:100px;
+  margin-bottom:16px;
+}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:46px;line-height:.95;letter-spacing:.01em;
+  color:#fff;margin-bottom:10px;
+}
+.hero h1 em{color:var(--lime);font-style:normal}
+.hero p{font-size:13px;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5}
+
+/* ─── TAB BAR ─── */
+.tabbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,11,14,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;overflow-x:auto;
+  scrollbar-width:none;-ms-overflow-style:none;
+  padding:0 12px;
+  gap:2px;
+}
+.tabbar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;
+  padding:12px 14px;
+  font-size:12px;font-weight:500;
+  color:var(--muted);
+  border-bottom:2px solid transparent;
+  cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+  letter-spacing:.02em;
+}
+.tab.active{color:var(--lime);border-bottom-color:var(--lime)}
+
+/* ─── PANELS ─── */
+.panel{display:none;padding:20px 16px 100px;animation:fadeIn .25s ease}
+.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── SECTION LABEL ─── */
+.slabel{
+  font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:12px;
+}
+
+/* ─── CARDS ─── */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:16px;
+  margin-bottom:12px;
+  position:relative;overflow:hidden;
+}
+.card-accent{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--c,var(--lime));opacity:.65;
+}
+.card h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;letter-spacing:.03em;color:#fff;
+  margin-bottom:10px;
+}
+.card p{font-size:13px;color:var(--text);line-height:1.55}
+
+/* ─── RESUME ─── */
+.bullet-list{list-style:none}
+.bullet-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13.5px;color:var(--text);line-height:1.45;
+}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list .ico{font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* ─── OBJECTIFS ─── */
+.obj-scroll{
+  display:flex;gap:10px;
+  overflow-x:auto;padding-bottom:4px;
+  scrollbar-width:none;margin:0 -16px;padding-left:16px;
+}
+.obj-scroll::-webkit-scrollbar{display:none}
+.obj-tile{
+  flex-shrink:0;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:16px;width:150px;
+  position:relative;overflow:hidden;
+}
+.obj-tile::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--c,var(--lime));opacity:.7;
+}
+.obj-big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:32px;line-height:1;
+  color:var(--c,var(--lime));
+  margin-bottom:4px;
+}
+.obj-lbl{font-size:11px;color:var(--muted);line-height:1.4}
+.obj-note{font-size:10px;color:var(--dim);margin-top:6px;font-style:italic;line-height:1.35}
+.editable{border-bottom:1px dashed rgba(255,255,255,.2);cursor:text;color:#fff}
+
+/* ─── TIMELINE ─── */
+.month-block{margin-bottom:16px}
+.month-header{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:var(--r) var(--r) 0 0;
+  cursor:pointer;
+  user-select:none;
+}
+.month-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--c,var(--lime));flex-shrink:0;
+}
+.month-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16px;letter-spacing:.04em;color:#fff;flex:1;
+}
+.month-sub{font-size:11px;color:var(--muted)}
+.chevron{
+  font-size:14px;color:var(--muted);
+  transition:transform .25s;flex-shrink:0;
+}
+.month-block.open .chevron{transform:rotate(180deg)}
+.month-body{
+  background:var(--card);
+  border:1px solid var(--border);border-top:none;
+  border-radius:0 0 var(--r) var(--r);
+  padding:16px;
+  display:none;
+}
+.month-block.open .month-body{display:block}
+.m-list{list-style:none;margin-bottom:14px}
+.m-list li{
+  font-size:13px;color:var(--text);
+  padding:7px 0 7px 16px;position:relative;
+  border-bottom:1px solid var(--border);line-height:1.4;
+}
+.m-list li:last-child{border-bottom:none}
+.m-list li::before{
+  content:'→';position:absolute;left:0;
+  color:var(--mc,var(--lime));font-size:11px;top:8px;
+}
+.focus-box{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:var(--rS);
+  padding:12px;margin-bottom:10px;
+}
+.focus-box .ft,.error-box .ft{
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:5px;
+}
+.focus-box .ft{color:var(--mc,var(--lime))}
+.focus-box p{font-size:12px;color:var(--muted);line-height:1.5}
+.error-box{
+  background:rgba(240,74,74,.06);
+  border:1px solid rgba(240,74,74,.2);
+  border-radius:var(--rS);
+  padding:12px;
+}
+.error-box .ft{color:var(--red)}
+.error-box p{font-size:12px;color:#c47070;line-height:1.5}
+
+/* ─── CHECKLIST ─── */
+.check-section{margin-bottom:20px}
+.check-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:.04em;color:#fff;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.check-title .ico{font-size:20px}
+.check-item{
+  display:flex;align-items:center;gap:14px;
+  padding:13px 16px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--rS);
+  margin-bottom:8px;
+  cursor:pointer;
+  transition:border-color .15s,background .15s;
+  -webkit-user-select:none;user-select:none;
+  min-height:50px;
+}
+.check-item.done{
+  background:rgba(201,241,74,.04);
+  border-color:rgba(201,241,74,.2);
+}
+.check-box{
+  width:22px;height:22px;flex-shrink:0;
+  border:1.5px solid var(--dim);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+  font-size:13px;font-weight:700;color:transparent;
+}
+.check-item.done .check-box{
+  background:var(--lime);border-color:var(--lime);color:#000;
+}
+.check-label{font-size:13.5px;color:var(--text);line-height:1.4;flex:1}
+.check-item.done .check-label{color:var(--muted);text-decoration:line-through}
+
+/* ─── FOOTER ─── */
+.footer-wrap{
+  padding:40px 20px 60px;
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+.footer-q{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;line-height:1.1;color:#fff;
+  margin-bottom:8px;
+}
+.footer-q em{color:var(--lime);font-style:normal}
+.footer-sub{font-size:11px;color:var(--dim)}
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);padding:16px;margin-bottom:16px;
+}
+.pb-label{font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between}
+.pb-label span{color:var(--lime);font-weight:600}
+.pb-track{height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.pb-fill{height:100%;border-radius:3px;transition:width .4s ease}
+
+/* ─── TAGS ─── */
+.tag{
+  display:inline-block;font-size:10px;font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 9px;border-radius:100px;
+}
+.tag-lime{background:rgba(201,241,74,.1);color:var(--lime);border:1px solid rgba(201,241,74,.2)}
+.tag-teal{background:rgba(60,240,168,.1);color:var(--teal);border:1px solid rgba(60,240,168,.2)}
+.tag-orange{background:rgba(240,168,60,.1);color:var(--orange);border:1px solid rgba(240,168,60,.2)}
+
+/* ─── GAP / SEP ─── */
+.gap{height:20px}
+.sep{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:16px 0}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="pill">🔒 Plan personnalisé · 12 semaines</div>
+  <h1>Roadmap<br><em>Léon</em></h1>
+  <p>Plus de muscle · Plus d'autonomie · Un système que tu peux tenir.</p>
+</div>
+
+<!-- TAB BAR -->
+<div class="tabbar" id="tabbar">
+  <div class="tab active" data-panel="resume">Résumé</div>
+  <div class="tab" data-panel="objectifs">Objectifs</div>
+  <div class="tab" data-panel="roadmap">Roadmap</div>
+  <div class="tab" data-panel="checklist">Checklist</div>
+</div>
+
+<!-- ═══ PANEL : RÉSUMÉ ═══ -->
+<div class="panel active" id="panel-resume">
+  <div class="slabel">En 15 secondes</div>
+
+  <ul class="bullet-list">
+    <li>
+      <span class="ico">🧠</span>
+      <span>Comprendre ce que tu manges — et pourquoi ça marche semaine après semaine.</span>
+    </li>
+    <li>
+      <span class="ico">💪</span>
+      <span>T'entraîner plus intelligemment : aller proche de l'échec, progresser sans te cramer.</span>
+    </li>
+    <li>
+      <span class="ico">📈</span>
+      <span>Mesurer les progrès autrement que la balance — charges, mensurations, énergie.</span>
+    </li>
+    <li>
+      <span class="ico">🔄</span>
+      <span>Installer des routines simples et durables — sommeil, alimentation, récup.</span>
+    </li>
+    <li>
+      <span class="ico">🎯</span>
+      <span>Être autonome au bout des 3 mois, avec des bases pour continuer seul.</span>
+    </li>
+  </ul>
+
+  <div class="gap"></div>
+  <div class="slabel">Les 3 piliers</div>
+
+  <div class="card" style="--c:var(--teal)">
+    <div class="card-accent"></div>
+    <h3>🥩 Nutrition</h3>
+    <p>Surplus calorique contrôlé · Macros maîtrisées · Aliments bruts prioritaires · Autonomie de comptage d'ici la fin du mois 2.</p>
+    <div class="gap" style="height:10px"></div>
+    <span class="tag tag-teal">Base → Autonomie</span>
+  </div>
+
+  <div class="card" style="--c:var(--lime)">
+    <div class="card-accent"></div>
+    <h3>🏋️ Entraînement</h3>
+    <p>RIR / RPE · Techniques d'intensification (avec parcimonie) · Progression semaine après semaine · Technique et amplitude contrôlées.</p>
+    <div class="gap" style="height:10px"></div>
+    <span class="tag tag-lime">Intensité → Progression</span>
+  </div>
+
+  <div class="card" style="--c:var(--orange)">
+    <div class="card-accent"></div>
+    <h3>😴 Récup & Mindset</h3>
+    <p>Routines sommeil simples · Indicateurs d'énergie · Identité et régularité · Protocole "jour sans motivation".</p>
+    <div class="gap" style="height:10px"></div>
+    <span class="tag tag-orange">Routines → Constance</span>
+  </div>
+</div>
+
+<!-- ═══ PANEL : OBJECTIFS ═══ -->
+<div class="panel" id="panel-objectifs">
+  <div class="slabel">Ce qu'on cible d'ici la fin</div>
+
+  <div class="obj-scroll">
+    <div class="obj-tile" style="--c:var(--lime)">
+      <div class="obj-big"><span class="editable" contenteditable="true">+5</span>kg</div>
+      <div class="obj-lbl">Charges clés (squat, développé, tirage)</div>
+      <div class="obj-note">À ajuster selon point de départ</div>
+    </div>
+    <div class="obj-tile" style="--c:var(--teal)">
+      <div class="obj-big"><span class="editable" contenteditable="true">+200</span><span style="font-size:18px">kcal</span></div>
+      <div class="obj-lbl">Surplus calorique maîtrisé / jour</div>
+      <div class="obj-note">Compter seul dès la fin du mois 2</div>
+    </div>
+    <div class="obj-tile" style="--c:var(--orange)">
+      <div class="obj-big"><span class="editable" contenteditable="true">7h15</span></div>
+      <div class="obj-lbl">Sommeil moyen cible par nuit</div>
+      <div class="obj-note">Minimum récup musculaire</div>
+    </div>
+    <div class="obj-tile" style="--c:var(--purple)">
+      <div class="obj-big"><span class="editable" contenteditable="true">+2</span>kg</div>
+      <div class="obj-lbl">Prise de poids totale sur 12 semaines</div>
+      <div class="obj-note">Masse lente = qualité</div>
+    </div>
+    <div class="obj-tile" style="--c:var(--teal)">
+      <div class="obj-big"><span class="editable" contenteditable="true">≥2g</span></div>
+      <div class="obj-lbl">Protéines par kg de poids / jour</div>
+      <div class="obj-note">Non négociable</div>
+    </div>
+    <div class="obj-tile" style="--c:var(--lime)" style="margin-right:16px">
+      <div class="obj-big"><span class="editable" contenteditable="true">3/4</span></div>
+      <div class="obj-lbl">Séances tenues par semaine</div>
+      <div class="obj-note">Régularité > perfection</div>
+    </div>
+  </div>
+
+  <p style="font-size:10px;color:var(--dim);margin:12px 0 24px;padding-left:2px">🖊 Champs soulignés modifiables — tape dessus pour personnaliser.</p>
+
+  <div class="slabel">Progression semaine / semaine</div>
+  <div class="progress-bar">
+    <div class="pb-label">Mois 1 — Bases <span>Semaines 1→4</span></div>
+    <div class="pb-track"><div class="pb-fill" style="width:33%;background:var(--teal)"></div></div>
+  </div>
+  <div class="progress-bar">
+    <div class="pb-label">Mois 2 — Autonomie <span>Semaines 5→8</span></div>
+    <div class="pb-track"><div class="pb-fill" style="width:66%;background:var(--lime)"></div></div>
+  </div>
+  <div class="progress-bar">
+    <div class="pb-label">Mois 3 — Consolidation <span>Semaines 9→12</span></div>
+    <div class="pb-track"><div class="pb-fill" style="width:100%;background:var(--orange)"></div></div>
+  </div>
+</div>
+
+<!-- ═══ PANEL : ROADMAP ═══ -->
+<div class="panel" id="panel-roadmap">
+  <div class="slabel">Plan mois par mois</div>
+
+  <!-- MOIS 1 -->
+  <div class="month-block open" id="m1">
+    <div class="month-header" onclick="toggleMonth('m1')" style="--c:var(--teal)">
+      <div class="month-dot" style="background:var(--teal)"></div>
+      <div>
+        <div class="month-label">Mois 1 — Bases</div>
+        <div class="month-sub">Semaines 1 à 4</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="month-body">
+      <ul class="m-list" style="--mc:var(--teal)">
+        <li>Comprendre le rôle des macros : protéines / glucides / lipides</li>
+        <li>Calculer ses calories et identifier son niveau de maintenance</li>
+        <li>Introduction au RIR : apprendre à sentir "vrai proche échec"</li>
+        <li>Installer 2 routines sommeil fixes (coucher + réveil)</li>
+        <li>Logger ses repas 5 j/7 (app ou carnet)</li>
+        <li>Identifier aliments bruts vs ultra-transformés</li>
+      </ul>
+      <div class="focus-box" style="--mc:var(--teal)">
+        <div class="ft">🎯 Focus semaine type</div>
+        <p>S1 : log strict · S2 : peser les portions clés · S3 : tester RIR sur 1 exercice/séance · S4 : réduire caféine et écrans avant le coucher.</p>
+      </div>
+      <div class="error-box">
+        <div class="ft">⚠ Erreur à éviter</div>
+        <p>Vouloir tout corriger en même temps. Une habitude installée = une victoire. Ne pas négliger les bases sous prétexte que tu les connais.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOIS 2 -->
+  <div class="month-block" id="m2">
+    <div class="month-header" onclick="toggleMonth('m2')" style="--c:var(--lime)">
+      <div class="month-dot" style="background:var(--lime)"></div>
+      <div>
+        <div class="month-label">Mois 2 — Autonomie</div>
+        <div class="month-sub">Semaines 5 à 8</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="month-body">
+      <ul class="m-list" style="--mc:var(--lime)">
+        <li>Compter ses calories en autonomie (estimation sans peser)</li>
+        <li>Mettre en place le surplus contrôlé (+150 à +250 kcal/j)</li>
+        <li>Introduire 1 technique d'intensification / semaine (rest-pause ou tempo)</li>
+        <li>Progresser en charge ou reps sur les exercices principaux</li>
+        <li>Comprendre tension mécanique : amplitude, contrôle, technique</li>
+        <li>Énergie + performances comme indicateurs de récup</li>
+      </ul>
+      <div class="focus-box" style="--mc:var(--lime)">
+        <div class="ft">🎯 Focus semaine type</div>
+        <p>S5 : estimation calorique sans pesée · S6 : rest-pause sur 1 isolation · S7 : noter progression charge/reps · S8 : ajuster surplus si poids stagne.</p>
+      </div>
+      <div class="error-box">
+        <div class="ft">⚠ Erreur à éviter</div>
+        <p>Sur-intensifier dès le départ. Les techniques avancées s'utilisent avec parcimonie — 1 par séance max. Le volume efficace prime.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOIS 3 -->
+  <div class="month-block" id="m3">
+    <div class="month-header" onclick="toggleMonth('m3')" style="--c:var(--orange)">
+      <div class="month-dot" style="background:var(--orange)"></div>
+      <div>
+        <div class="month-label">Mois 3 — Consolidation</div>
+        <div class="month-sub">Semaines 9 à 12</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="month-body">
+      <ul class="m-list" style="--mc:var(--orange)">
+        <li>Ajustements fins nutrition selon les 8 semaines de données</li>
+        <li>Installer une identité durable : "je suis quelqu'un qui s'entraîne"</li>
+        <li>Protocole "jour sans" : que faire quand la motivation est à zéro</li>
+        <li>Mesurer les progrès autrement : photos, mensurations, performances</li>
+        <li>Préparer l'après : plan alimentaire autonome + programme modulable</li>
+        <li>Bilan final : ce qui a marché, ce qui s'ajuste, la suite</li>
+      </ul>
+      <div class="focus-box" style="--mc:var(--orange)">
+        <div class="ft">🎯 Focus semaine type</div>
+        <p>S9 : review complet des progrès · S10 : affiner selon fatigue accumulée · S11 : rédiger son propre plan semaine · S12 : bilan + projection 3 mois suivants.</p>
+      </div>
+      <div class="error-box">
+        <div class="ft">⚠ Erreur à éviter</div>
+        <p>Chercher la perfection plutôt que la constance. Les dernières semaines servent à consolider — pas à tout maximiser.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PANEL : CHECKLIST ═══ -->
+<div class="panel" id="panel-checklist">
+  <div class="slabel">Ta semaine en 4 blocs</div>
+
+  <div class="check-section">
+    <div class="check-title"><span class="ico">🥩</span> Nutrition</div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Suivi alimentaire ≥ 5 jours</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Protéines atteintes chaque jour</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Repas préparés en avance (x2 min)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Hydratation : 2L+ par jour</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Ultra-transformés limités cette semaine</div></div>
+  </div>
+
+  <div class="check-section">
+    <div class="check-title"><span class="ico">🏋️</span> Entraînement</div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Séances planifiées effectuées</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Proximité échec ressentie (RIR 1-2)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Progression notée (charge / reps)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Technique contrôlée sur exercices clés</div></div>
+  </div>
+
+  <div class="check-section">
+    <div class="check-title"><span class="ico">😴</span> Récupération</div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">≥ 7h de sommeil la majorité des nuits</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Heure de coucher régulière (±30 min)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Pas de caféine après 14h</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Activité légère entre les séances</div></div>
+  </div>
+
+  <div class="check-section">
+    <div class="check-title"><span class="ico">🧠</span> Mindset</div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Review de semaine faite (5 min)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Prochaine semaine planifiée</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Un progrès noté (non-balance)</div></div>
+    <div class="check-item" onclick="toggle(this)"><div class="check-box">✓</div><div class="check-label">Pas de "tout ou rien" cette semaine</div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-wrap">
+  <div class="footer-q">Tu ne cherches pas<br>la <em>perfection</em>.<br>Tu cherches la <em>répétition</em>.</div>
+  <div class="footer-sub">Plan 12 semaines · Léon · Prise de masse</div>
+</div>
+
+<script>
+// ── TABS
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('.panel');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+});
+
+// ── ACCORDION
+function toggleMonth(id) {
+  const block = document.getElementById(id);
+  block.classList.toggle('open');
+}
+
+// ── CHECKLIST
+function toggle(el) {
+  el.classList.toggle('done');
+}
+</script>
+</body>
+</html>
